@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 2020_08_17_190530) do
 
   create_table "albums", force: :cascade do |t|
-    t.string "title"
+    t.string "album_title"
     t.integer "creation_year"
     t.string "genre"
     t.datetime "created_at", null: false
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2020_08_17_190530) do
   end
 
   create_table "songs", force: :cascade do |t|
-    t.string "title"
+    t.string "song_title"
     t.integer "artist_id"
     t.integer "album_id"
   end
