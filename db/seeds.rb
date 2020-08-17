@@ -1,8 +1,8 @@
 puts "deleted all instances"
 
-# Album.destroy_all
-# Artist.destroy_all
-# Song.destroy_all
+Album.destroy_all
+Artist.destroy_all
+Song.destroy_all
 
 #Album (title(s), creationyear(i), genre(s))
 puts "seeding albums"

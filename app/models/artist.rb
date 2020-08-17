@@ -3,4 +3,3 @@ class Artist < ActiveRecord::Base
     has_many :albums, through: :songs
 end 
 
-#Artist -< Song >-Album
