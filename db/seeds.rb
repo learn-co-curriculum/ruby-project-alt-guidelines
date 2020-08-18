@@ -1,4 +1,4 @@
-puts "deleted all instances"
+puts "deleting all instances"
 
 Album.destroy_all
 Artist.destroy_all
