@@ -60,6 +60,16 @@ class PantryApp
     end
 
     def delete_helper
+    binding.pry
+        my_resources = self.all_names
+        selected_resource_id = prompt.select("Which resource would you like to delete?", my_resources)
+        deleted_resource = FavResource.destroy(user_id: user.id, resource_id: selected_resource_id)
+        puts "#{deleted_resource.resource.name} has been deleted from your fav resources."
+        sleep(2.0)
+        main_screen
+        # a list of all of the resources
+        #select a resource
+        #when the user clicks enter, that resource gets deleted from fav_resource
     end
 
     def exit
