@@ -52,14 +52,36 @@ class PantryApp
     end
 
     def view_helper
-        my_resources = User.resources
+         my_resources = user.my_resources
+         prompt.say(my_resources)
         # display a list of all FavResources
     end
 
     def update_helper
+        #display favresources
+        #ask what to update
+        #what about resource to update
+        #do update
+        binding.pry
+        my_resources = user.my_resources
+        selected_resource = prompt.select("What resource do you want to change?", my_resources)
+        prompt.select("Which aspect of FavResource to update?")    
+
+        # result = prompt.collect do
+        #     key(:name).ask("Name?")
+        #     key(:neighborhood).ask("Neighborhood?")
+        #     key(:description).ask("Description?")
+        #     key(:fresh).ask("Fresh?", convert: :boolean)
+        #   end
+
+
+
     end
 
     def delete_helper
+        # display favresources
+        #select one to delete
+        #delete selected
     end
 
     def exit
