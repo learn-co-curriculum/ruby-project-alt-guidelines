@@ -1,24 +1,33 @@
 class PantryApp
+    attr_reader :prompt
     attr_accessor :user
-    include CliControls
+    # include CliControls
+
+    def initialize
+        @prompt = TTY::Prompt.new
+    end
 
     def run
         greet
         login_or_signup
-        see_resources
+        manage_resources
         goodbye
     end
 
     def greet
+        puts "hello"
     end
 
     def login_or_signup
+        prompt.ask("Do you want to log in or sign up?")
     end
 
-    def see_resources
+    def manage_resources
+        prompt.ask("Do you want to manage your resources?")
     end
 
     def goodbye
+        puts "See you later!"
     end
 
 end
