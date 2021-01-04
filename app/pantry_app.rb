@@ -52,21 +52,41 @@ class PantryApp
     end
 
     def view_helper
-        my_resources = User.resources
+         my_resources = user.my_resources
+         prompt.say(my_resources)
         # display a list of all FavResources
     end
 
     def update_helper
+        #display favresources
+        #ask what to update
+        #what about resource to update
+        #do update
+        binding.pry
+        my_resources = user.my_resources
+        selected_resource = prompt.select("What resource do you want to change?", my_resources)
+        prompt.select("Which aspect of FavResource to update?")    
+
+        # result = prompt.collect do
+        #     key(:name).ask("Name?")
+        #     key(:neighborhood).ask("Neighborhood?")
+        #     key(:description).ask("Description?")
+        #     key(:fresh).ask("Fresh?", convert: :boolean)
+        #   end
+
+
+
     end
 
     def delete_helper
     binding.pry
-        my_resources = self.all_names
-        selected_resource_id = prompt.select("Which resource would you like to delete?", my_resources)
-        deleted_resource = FavResource.destroy(user_id: user.id, resource_id: selected_resource_id)
-        puts "#{deleted_resource.resource.name} has been deleted from your fav resources."
-        sleep(2.0)
-        main_screen
+        my_resources = user.my_resources
+        selected_resource = prompt.select("Which resource would you like to delete?", my_resources.name)
+        selected_resource.destroy
+        # deleted_resource = favresource.destroy(user_id: user.id, resource_id: selected_resource_id)
+        # puts "#{deleted_resource.resource.name} has been deleted from your fav resources."
+        # sleep(2.0)
+        # main_screen
         # a list of all of the resources
         #select a resource
         #when the user clicks enter, that resource gets deleted from fav_resource
