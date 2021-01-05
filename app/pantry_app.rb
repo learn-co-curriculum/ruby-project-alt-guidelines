@@ -30,13 +30,31 @@ class PantryApp
     def main_screen
         system 'clear'
         user.reload
-        prompt.select("Do you want to manage your resources?") do |menu|
+        prompt.select("What do you want to do?") do |menu|
+            menu.choice "Find Resources in New York City", -> {find_helper}
             menu.choice "Add a resource to my resources", -> {add_helper}
             menu.choice "View all of my resources", -> {view_helper}
             menu.choice "Update a resource nickname", -> {update_helper}
             menu.choice "Delete a resource", -> {delete_helper}
             menu.choice "Exit", -> {exit}
           end
+    end
+
+    def find_helper
+        prompt.select("Find resources by:") do |menu|
+            menu.choice "Borough", -> {borough_helper}
+            menu.choice "Fresh food offered", -> {fresh_helper}
+            menu.choice "View resources descriptions", -> {description_helper}
+          end
+    end
+
+    def borough_helper
+    end
+
+    def fresh_helper
+    end
+
+    def description_helper
     end
 
     def add_helper
@@ -49,7 +67,14 @@ class PantryApp
         main_screen
     end
 
+    def select_helper
+        fav_resource_arr = user.show_fav_resource
+        @selected_resource = prompt.select("Which resource do you want to select?", fav_resource_arr)
+        puts "You have selected #{selected_resource.resource.name}."
+    end # return an instance of fav_resources
+
     def view_helper
+        select_helper
          my_resources = user.resource_names
          puts "Here are your resources:"
          my_resources.each do |res|
@@ -59,17 +84,11 @@ class PantryApp
          main_screen
     end
 
-    def select_helper
-        fav_resource_arr = user.show_fav_resource
-        @selected_resource = prompt.select("Which resource do you want to select?", fav_resource_arr)
-        puts "You have selected #{selected_resource.resource.name}."
-    end # return an instance of fav_resources
-
     def update_helper
         select_helper
-        nickname = prompt.ask("Enter a new nickname?")
-        @selected_resource.update(nickname: nickname)
-        puts "You updated #{selected_resource.nickname}."
+        new_nickname = prompt.ask("Enter a new nickname?")
+        @selected_resource.update(nickname: new_nickname)
+        puts "You updated #{selected_resource.resource.name} to #{selected_resource.nickname}."
         sleep(1.5)
         main_screen
     end
