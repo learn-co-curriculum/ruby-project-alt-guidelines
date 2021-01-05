@@ -49,18 +49,34 @@ class PantryApp
     end
 
     def borough_helper
+        # borough_arr = Resource.boroughs
+        # selected_borough
     end
 
     def fresh_helper
+        Resource.fresh_resources.each do |resource|
+            puts resource
+        end
+        sleep(1.5)
+        find_helper
     end
 
     def description_helper
+        descriptions_arr = Resource.descriptions
+        selected_description = prompt.select("Select resource to see description.", descriptions_arr)
+        puts "#{selected_description}"
+        sleep(2.0)
+        find_helper
     end
 
     def add_helper
         resources = Resource.all_names
         selected_resource_id = prompt.select("Which resource do you wish to add?", resources)
-        nickname = prompt.ask("Enter a nickname for this resource?")
+        nickname = prompt.ask("Enter a nickname for this resource?") do |q|
+            q.required true
+            q.validate /\A\w+\Z/
+            q.modify   :capitalize
+          end 
         new_fav = FavResource.create(user_id: user.id, resource_id: selected_resource_id, nickname: nickname)
         puts "Congratulations! You added #{new_fav.resource.name} to your fav resources."
         sleep(2.0)
