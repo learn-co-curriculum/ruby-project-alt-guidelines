@@ -68,25 +68,27 @@ class PantryApp
     end
 
     def select_helper
-        fav_resource_arr = user.show_fav_resource
+        fav_resource_arr = @user.show_fav_resource
         @selected_resource = prompt.select("Which resource do you want to select?", fav_resource_arr)
-        puts "You have selected #{selected_resource.resource.name}."
+        puts "You have selected #{selected_resource.nickname}."
+        sleep(1.0)
     end # return an instance of fav_resources
 
     def view_helper
-        select_helper
-         my_resources = user.resource_names
-         puts "Here are your resources:"
-         my_resources.each do |res|
-            puts res
-         end
-         sleep(2.0)
-         main_screen
+        if user.fav_resources.length == 0
+            answer = prompt.yes?("You have no saved resources. Add a resource?", convert: :boolean)
+            answer ? add_helper : main_screen
+        else 
+            select_helper
+        end
+        prompt.say("Resource: #{selected_resource.resource.name} -> Your resource nickname: '#{selected_resource.nickname}'")
+        sleep(1.5)
+        main_screen
     end
 
     def update_helper
         select_helper
-        new_nickname = prompt.ask("Enter a new nickname?")
+        new_nickname = prompt.ask("Enter a new nickname?", default: "none")
         @selected_resource.update(nickname: new_nickname)
         puts "You updated #{selected_resource.resource.name} to #{selected_resource.nickname}."
         sleep(1.5)
@@ -96,8 +98,10 @@ class PantryApp
     def delete_helper
         select_helper
         answer = prompt.yes?("Delete this resource?", convert: :boolean)
-        answer ? @selected_resource.destroy : nil
+        if answer
+             @selected_resource.destroy
         puts "#{selected_resource.resource.name} has been deleted from your fav resources."
+        end
         sleep(1.5)
         main_screen
     end
