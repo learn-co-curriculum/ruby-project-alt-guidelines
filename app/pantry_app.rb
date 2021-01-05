@@ -62,7 +62,7 @@ class PantryApp
     def select_helper
         fav_resource_arr = user.show_fav_resource
         @selected_resource = prompt.select("Which resource do you want to select?", fav_resource_arr)
-        puts "You have selected #{selected_resource.nickname}."
+        puts "You have selected #{selected_resource.resource.name}."
     end # return an instance of fav_resources
 
     def update_helper
@@ -78,14 +78,9 @@ class PantryApp
         select_helper
         answer = prompt.yes?("Delete this resource?", convert: :boolean)
         answer ? @selected_resource.destroy : nil
-        puts "#{selected_resource.nickname} has been deleted from your fav resources."
+        puts "#{selected_resource.resource.name} has been deleted from your fav resources."
         sleep(1.5)
         main_screen
-        # my_resources = user.my_resources
-        # selected_resource = prompt.select("Which resource would you like to delete?", my_resources.name)
-        # a list of all of the resources
-        #select a resource
-        #when the user clicks enter, that resource gets deleted from fav_resource
     end
 
     def exit
