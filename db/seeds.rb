@@ -37,12 +37,12 @@ r19 = Resource.create(name: "Saint Nicholas of Tolentine Parish", neighborhood: 
 
 
 # Fav Resources
-fav1 = FavResource.create(user_id: u1.id, resource_id: r3.id)
-fav2 = FavResource.create(user_id: u3.id, resource_id: r5.id)
-fav3 = FavResource.create(user_id: u4.id, resource_id: r7.id)
-fav4 = FavResource.create(user_id: u2.id, resource_id: r9.id)
-fav5 = FavResource.create(user_id: u3.id, resource_id: r11.id)
-fav6 = FavResource.create(user_id: u2.id, resource_id: r14.id)
-fav6 = FavResource.create(user_id: u2.id, resource_id: r16.id)
-fav6 = FavResource.create(user_id: u4.id, resource_id: r16.id)
-fav6 = FavResource.create(user_id: u1.id, resource_id: r15.id)
+fav1 = FavResource.create(user_id: u1.id, resource_id: r3.id, nickname: "Temple Shaaray")
+fav2 = FavResource.create(user_id: u3.id, resource_id: r5.id, nickname: "Apostle Pantry")
+fav3 = FavResource.create(user_id: u4.id, resource_id: r7.id, nickname: "Salvation Army")
+fav4 = FavResource.create(user_id: u2.id, resource_id: r9.id, nickname: "Heart Ministries")
+fav5 = FavResource.create(user_id: u3.id, resource_id: r11.id, nickname: "Missionary")
+fav6 = FavResource.create(user_id: u2.id, resource_id: r14.id, nickname: "Woodycrest")
+fav7 = FavResource.create(user_id: u2.id, resource_id: r16.id, nickname: "J & C Ministries")
+fav8 = FavResource.create(user_id: u4.id, resource_id: r17.id, nickname: "Thorpe")
+fav9 = FavResource.create(user_id: u1.id, resource_id: r15.id, nickname: "Thomas Aquinas")

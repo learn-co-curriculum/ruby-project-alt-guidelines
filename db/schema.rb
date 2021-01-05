@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_04_170921) do
+ActiveRecord::Schema.define(version: 2021_01_05_135222) do
 
   create_table "fav_resources", force: :cascade do |t|
     t.integer "user_id"
     t.integer "resource_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "nickname"
   end
 
   create_table "resources", force: :cascade do |t|
