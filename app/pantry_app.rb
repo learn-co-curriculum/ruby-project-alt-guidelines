@@ -1,6 +1,6 @@
 class PantryApp
     attr_reader :prompt
-    attr_accessor :user, :selected_resource, :chosen_resource
+    attr_accessor :user, :selected_resource
     # include CliControls
 
     def initialize
@@ -72,6 +72,22 @@ class PantryApp
         end
     end
 
+    def fresh_helper
+        Resource.fresh_resources.each do |resource|
+            puts resource
+        end
+        sleep(1.5)
+        find_helper
+    end
+
+    def description_helper
+        descriptions_arr = Resource.descriptions
+        selected_description = prompt.select("Select resource to see description.", descriptions_arr)
+        puts "#{selected_description}"
+        sleep(2.0)
+        find_helper
+    end
+
     def bronx_helper
         puts Resource.bronx_names
         sleep(3)
@@ -102,16 +118,6 @@ class PantryApp
         end
     end
 
-    def view_helper
-        my_resources = user.resource_names
-        puts "Favorite Pantries:"
-        my_resources.each do |res|
-           puts res
-        end
-        sleep(3.0)
-        home_page
-   end
-
     def select_helper
         fav_resource_arr = user.show_fav_resource
         @selected_resource = prompt.select("Which pantry do you want to select?", fav_resource_arr)
@@ -130,10 +136,24 @@ class PantryApp
     def add_helper
         resources = Resource.all_names
         selected_resource_id = prompt.select("Which pantry would you like to add to your Favorite Pantries?", resources)
-        nickname = prompt.ask("Enter a nickname for this pantry:")
+        nickname = prompt.ask("Enter a nickname for this pantry:") do |q|
+            q.required true
+          end 
         new_fav = FavResource.create(user_id: user.id, resource_id: selected_resource_id, nickname: nickname)
         puts "#{new_fav.resource.name} has been added to your Favorite Pantries."
         sleep(2.0)
+        home_page
+    end
+
+    def view_helper
+        if user.fav_resources.length == 0
+            answer = prompt.yes?("You have no saved resources. Add a resource?", convert: :boolean)
+            answer ? add_helper : main_screen
+        else 
+            select_helper
+        end
+        prompt.say("Resource: #{selected_resource.resource.name} -> Your resource nickname: '#{selected_resource.nickname}'")
+        sleep(1.5)
         home_page
     end
 
