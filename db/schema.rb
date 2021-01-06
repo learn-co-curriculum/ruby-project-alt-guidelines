@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2021_01_05_135222) do
 
   create_table "resources", force: :cascade do |t|
     t.string "name"
-    t.string "neighborhood"
+    t.string "borough"
     t.string "description"
     t.boolean "fresh"
     t.datetime "created_at", null: false
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 2021_01_05_135222) do
 
   create_table "users", force: :cascade do |t|
     t.string "username"
-    t.string "neighborhood"
+    t.string "borough"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

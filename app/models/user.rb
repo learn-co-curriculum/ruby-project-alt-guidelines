@@ -4,9 +4,9 @@ class User < ActiveRecord::Base
 
     def resource_names
         resources.pluck(:name)
-    end #gets only the name from users fav resources 
+    end #gets only the name from user's fav resources 
 
     def show_fav_resource
         self.fav_resources.all.map{|fav|{fav.nickname => fav}}
-    end #return value is a hash with fav_nickname and fav instance
+    end #return value is a hash with fav's nicknames and fav's instances
 end
