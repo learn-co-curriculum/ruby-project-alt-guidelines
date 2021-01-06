@@ -1,6 +1,6 @@
 class PantryApp
     attr_reader :prompt
-    attr_accessor :user, :selected_resource, :selected_resource
+    attr_accessor :user, :selected_resource
     # include CliControls
 
     def initialize
