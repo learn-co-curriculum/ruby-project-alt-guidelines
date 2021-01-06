@@ -21,4 +21,13 @@ class Resource < ActiveRecord::Base
         boroughs_resources.map{|resource| resource.name}
     end
 
+    def self.fresh_resources
+        fresh_arr = self.all.select{|res| res.fresh}
+        fresh_arr.pluck(:name)
+    end
+
+    def self.descriptions
+        self.all.map{|res| {res.name => res.description}}
+    end
+
 end
