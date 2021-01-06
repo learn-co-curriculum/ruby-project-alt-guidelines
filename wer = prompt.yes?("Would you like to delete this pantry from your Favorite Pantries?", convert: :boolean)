@@ -1,0 +1,17 @@
+
+[1mFrom:[0m /mnt/c/Users/laure/dev/flatiron/labs/mod1-project/app/pantry_app.rb:167 PantryApp#delete_helper:
+
+    [1;34m165[0m: [32mdef[0m [1;34mdelete_helper[0m
+    [1;34m166[0m:     select_helper
+ => [1;34m167[0m:     binding.pry
+    [1;34m168[0m:     answer = prompt.yes?([31m[1;31m"[0m[31mWould you like to delete this pantry from your Favorite Pantries?[1;31m"[0m[31m[0m, [35mconvert[0m: [33m:boolean[0m)
+    [1;34m169[0m:     [32mif[0m answer
+    [1;34m170[0m:         @selected_resource.destroy
+    [1;34m171[0m:         puts [31m[1;31m"[0m[31m#{@selected_resource.resource.name}[0m[31m has been deleted from your Favorite Pantries.[1;31m"[0m[31m[0m
+    [1;34m172[0m:     [32melse[0m 
+    [1;34m173[0m:         puts [31m[1;31m"[0m[31m#{@selected_resource.resource.name}[0m[31m will remain in your Favorite Pantries.[1;31m"[0m[31m[0m
+    [1;34m174[0m:     [32mend[0m
+    [1;34m175[0m:     sleep([1;35m2.0[0m)
+    [1;34m176[0m:     home_page
+    [1;34m177[0m: [32mend[0m
+

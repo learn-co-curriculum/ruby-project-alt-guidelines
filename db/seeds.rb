@@ -1,3 +1,5 @@
+# require_relative '../config/pantry_scraper'
+
 User.destroy_all
 Resource.destroy_all
 FavResource.destroy_all
@@ -46,3 +48,13 @@ fav6 = FavResource.create(user_id: u2.id, resource_id: r14.id, nickname: "Woodyc
 fav7 = FavResource.create(user_id: u2.id, resource_id: r16.id, nickname: "J & C Ministries")
 fav8 = FavResource.create(user_id: u4.id, resource_id: r17.id, nickname: "Thorpe")
 fav9 = FavResource.create(user_id: u1.id, resource_id: r15.id, nickname: "Thomas Aquinas")
+
+$scraped_pantries = []
+PantryScraper.crawl!
+
+$scraped_pantries.each do |pantry|
+
+    Pantry.find_or_create()
+end
+
+binding.pry

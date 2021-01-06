@@ -1,17 +1,18 @@
 class PantryApp
     attr_reader :prompt
     attr_accessor :user, :selected_resource
+
     # include CliControls
 
     def initialize
         @prompt = TTY::Prompt.new
+        @selected_resource = nil
     end
 
     def run
         greet
         login_signup
         home_page
-        # exit
     end
 
     def greet
@@ -27,22 +28,28 @@ class PantryApp
     end
 
     def login_helper
-        username = prompt.ask("Enter your username to login:")
-        self.user = User.find_by(username: username)
+        username = prompt.ask("Enter your username to login:", required: true)
+        @user = User.find_by(username: username)
+        if user
         puts "Welcome, #{user.username}."
-        sleep (1.5)
+        else
+            puts "You must create an account to log in!"
+            sleep(1.5)
+            ca_helper
+        end
+        sleep (1.0)
     end
 
     def ca_helper
-        username = prompt.ask("Enter a username to create an account:")
+        username = prompt.ask("Enter a username to create an account:", required: true)
         while User.find_by(username: username)
             puts "This username is already taken."
-            username = prompt.ask("Enter a different username to create an account:")
+            username = prompt.ask("Enter a different username to create an account:", required: true)
         end
-        borough = prompt.ask("What borough do you live in?")
+        borough = prompt.select("What borough do you live in?", ["Brooklyn", "Manhattan", "Queens", "Staten Island", "The Bronx"])
         self.user = User.create(username: username, borough: borough)
         puts "Welcome, #{user.username}."
-        sleep(1.5)
+        sleep(1.0)
     end
 
     def home_page
@@ -119,14 +126,23 @@ class PantryApp
     end
 
     def select_helper
+        if user.fav_resources.length == 0
+            answer = prompt.yes?("You have no saved resources. Add a resource?", convert: :boolean)
+            answer ? add_helper : nil
+        end
         fav_resource_arr = user.show_fav_resource
         @selected_resource = prompt.select("Which pantry do you want to select?", fav_resource_arr)
         puts "You have selected #{selected_resource.resource.name}."
-    end # return an instance of fav_resources
+    end
+
+    def resource_validator
+        self.selected_resource == nil
+    end
 
     def change_helper
-        select_helper
-        nickname = prompt.ask("Enter a new nickname:")
+        # binding.pry
+        # self.resource_validator ? select_helper : 
+        nickname = prompt.ask("Enter a new nickname for #{selected_resource.resource.name}:", required: true)
         @selected_resource.update(nickname: nickname)
         puts "The new nickname is #{selected_resource.nickname}."
         sleep(2.0)
@@ -136,9 +152,7 @@ class PantryApp
     def add_helper
         resources = Resource.all_names
         selected_resource_id = prompt.select("Which pantry would you like to add to your Favorite Pantries?", resources)
-        nickname = prompt.ask("Enter a nickname for this pantry:") do |q|
-            q.required true
-          end 
+        nickname = prompt.ask("Enter a nickname for this pantry:", required: true)
         new_fav = FavResource.create(user_id: user.id, resource_id: selected_resource_id, nickname: nickname)
         puts "#{new_fav.resource.name} has been added to your Favorite Pantries."
         sleep(2.0)
@@ -146,12 +160,7 @@ class PantryApp
     end
 
     def view_helper
-        if user.fav_resources.length == 0
-            answer = prompt.yes?("You have no saved resources. Add a resource?", convert: :boolean)
-            answer ? add_helper : main_screen
-        else 
-            select_helper
-        end
+        select_helper
         prompt.say("Resource: #{selected_resource.resource.name} -> Your resource nickname: '#{selected_resource.nickname}'")
         sleep(1.5)
         home_page

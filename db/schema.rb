@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_05_135222) do
+ActiveRecord::Schema.define(version: 2021_01_06_191246) do
 
   create_table "fav_resources", force: :cascade do |t|
     t.integer "user_id"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2021_01_05_135222) do
 
   create_table "resources", force: :cascade do |t|
     t.string "name"
-    t.string "borough"
+    t.string "neighborhood"
     t.string "description"
     t.boolean "fresh"
     t.datetime "created_at", null: false
