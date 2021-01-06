@@ -1,6 +1,6 @@
 class PantryApp
     attr_reader :prompt
-    attr_accessor :user, :selected_resource
+    attr_accessor :user, :selected_resource, :selected_resource
     # include CliControls
 
     def initialize
@@ -45,25 +45,26 @@ class PantryApp
         sleep(1.5)
     end
 
-    # def login_or_signup
-    #     username = prompt.ask("Enter your username to log in or sign up!")
-    #     borough = prompt.ask("What borough do you live in?")
-    #     self.user = User.find_or_create_by(username: username, borough: borough)
-    #     puts "Thanks for signing in, #{user.username}!"
-    #     sleep(1.75)
-    # end
-
     def home_page
         system 'clear'
         user.reload
         prompt.select("What would you like to do?") do |menu|
-            menu.choice "Find a Pantry", -> {pantry_helper}
+            menu.choice "Find a Pantry", -> {find_helper}
             menu.choice "Manage Your Favorite Pantries", -> {favorites_helper}
             menu.choice "Log Out", -> {exit}
         end
     end
 
-    def pantry_helper
+    def find_helper
+        prompt.select("Find pantries by:") do |menu|
+            menu.choice "Borough", -> {borough_helper}
+            menu.choice "Fresh food offered", -> {fresh_helper}
+            menu.choice "View resources descriptions", -> {description_helper}
+            menu.choice "Return to Home Page", -> {home_page}
+          end
+    end
+
+    def borough_helper
         prompt.select("Which pantries would you like to view?") do |menu|
             menu.choice "Pantries in The Bronx", -> {bronx_helper}
             menu.choice "Pantries in Manhattan", -> {manhattan_helper}
@@ -97,7 +98,7 @@ class PantryApp
             menu.choice "Change a Favorite Pantry Nickname", -> {change_helper}
             menu.choice "Add to Your Favorite Pantries", -> {add_helper}
             menu.choice "Delete a Favorite Pantry", -> {delete_helper}
-            menu.choice "Exit", -> {exit}
+            menu.choice "Return to Home Page", -> {home_page}
         end
     end
 
@@ -111,14 +112,14 @@ class PantryApp
         home_page
    end
 
-    def change_helper_helper
+    def select_helper
         fav_resource_arr = user.show_fav_resource
-        @selected_resource = prompt.select("Which pantry do you want to give a different nickname?", fav_resource_arr)
+        @selected_resource = prompt.select("Which pantry do you want to select?", fav_resource_arr)
         puts "You have selected #{selected_resource.resource.name}."
     end # return an instance of fav_resources
 
     def change_helper
-        change_helper_helper
+        select_helper
         nickname = prompt.ask("Enter a new nickname:")
         @selected_resource.update(nickname: nickname)
         puts "The new nickname is #{selected_resource.nickname}."
@@ -134,121 +135,20 @@ class PantryApp
         puts "#{new_fav.resource.name} has been added to your Favorite Pantries."
         sleep(2.0)
         home_page
-        prompt.select("What do you want to do?") do |menu|
-            menu.choice "Find Resources in New York City", -> {find_helper}
-            menu.choice "Add a resource to my resources", -> {add_helper}
-            menu.choice "View all of my resources", -> {view_helper}
-            menu.choice "Update a resource nickname", -> {update_helper}
-            menu.choice "Delete a resource", -> {delete_helper}
-            menu.choice "Exit", -> {exit}
-          end
     end
-
-    def find_helper
-        prompt.select("Find resources by:") do |menu|
-            menu.choice "Borough", -> {borough_helper}
-            menu.choice "Fresh food offered", -> {fresh_helper}
-            menu.choice "View resources descriptions", -> {description_helper}
-          end
-    end
-
-    def borough_helper
-    end
-
-    def fresh_helper
-    end
-
-    def description_helper
-    end
-
-    def add_helper
-        resources = Resource.all_names
-        selected_resource_id = prompt.select("Which resource do you wish to add?", resources)
-        nickname = prompt.ask("Enter a nickname for this resource?")
-        new_fav = FavResource.create(user_id: user.id, resource_id: selected_resource_id, nickname: nickname)
-        puts "Congratulations! You added #{new_fav.resource.name} to your fav resources."
-        sleep(2.0)
-        main_screen
-    end
-
-    def select_helper
-        fav_resource_arr = user.show_fav_resource
-        @selected_resource = prompt.select("Which resource do you want to select?", fav_resource_arr)
-        puts "You have selected #{selected_resource.resource.name}."
-    end # return an instance of fav_resources
-
-    def view_helper
-        select_helper
-         my_resources = user.resource_names
-         puts "Here are your resources:"
-         my_resources.each do |res|
-            puts res
-         end
-         sleep(2.0)
-         main_screen
-    end
-
-    def update_helper
-        select_helper
-        new_nickname = prompt.ask("Enter a new nickname?")
-        @selected_resource.update(nickname: new_nickname)
-        puts "You updated #{selected_resource.resource.name} to #{selected_resource.nickname}."
-        sleep(1.5)
-        main_screen
-    end
-
-    def delete_helper_helper
-        fav_resource_arr = user.show_fav_resource
-        @chosen_resource = prompt.select("Which pantry do you want to delete from your Favorite Pantries?", fav_resource_arr)
-        puts "You have selected #{@chosen_resource.resource.name}."
-    end # return an instance of fav_resources
 
     def delete_helper
-        delete_helper_helper
+        select_helper
         answer = prompt.yes?("Would you like to delete this pantry from your Favorite Pantries?", convert: :boolean)
         if answer
-            @chosen_resource.destroy
-            puts "#{@chosen_resource.resource.name} has been deleted from your Favorite Pantries."
+            @selected_resource.destroy
+            puts "#{@selected_resource.resource.name} has been deleted from your Favorite Pantries."
         else 
-            puts "#{@chosen_resource.resource.name} will remain in your Favorite Pantries."
+            puts "#{@selected_resource.resource.name} will remain in your Favorite Pantries."
         end
         sleep(2.0)
         home_page
     end
-
-    # def view_helper
-    #      my_resources = user.resource_names
-    #      puts "Here are your resources:"
-    #      my_resources.each do |res|
-    #         puts res
-    #      end
-    #      sleep(2.0)
-    #      main_screen
-    # end
-
-    # def select_helper
-    #     fav_resource_arr = user.show_fav_resource
-    #     @selected_resource = prompt.select("Which resource do you want to select?", fav_resource_arr)
-    #     puts "You have selected #{selected_resource.resource.name}."
-    # end # return an instance of fav_resources
-
-    # def update_helper
-    #     select_helper
-    #     nickname = prompt.ask("Enter a new nickname?")
-    #     @selected_resource.update(nickname: nickname)
-    #     puts "You updated #{selected_resource.nickname}."
-    #     sleep(1.5)
-    #     main_screen
-    # end
-
-    # def delete_helper
-    #     select_helper
-    #     answer = prompt.yes?("Delete this resource?", convert: :boolean)
-    #     answer ? @selected_resource.destroy : nil
-    #     puts "#{selected_resource.resource.name} has been deleted from your fav resources."
-    #     sleep(1.5)
-    #     main_screen
-    # end
 
     def exit
         puts "Goodbye"
