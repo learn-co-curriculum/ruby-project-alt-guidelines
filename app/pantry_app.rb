@@ -150,9 +150,13 @@ class PantryApp
     def add_helper
         resources = Resource.all_names
         selected_resource_id = prompt.select("Which pantry would you like to add to your Favorite Pantries?", resources)
+        if user.fav_resources.find_by(resource_id: selected_resource_id)
+            puts("This resource is already saved to your Favorite Pantries.")
+        else
         nickname = prompt.ask("Enter a nickname for this pantry:", required: true)
         new_fav = FavResource.create(user_id: user.id, resource_id: selected_resource_id, nickname: nickname)
         puts "#{new_fav.resource.name} has been added to your Favorite Pantries."
+        end
         sleep(2.0)
         home_page
     end

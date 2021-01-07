@@ -49,12 +49,12 @@ fav7 = FavResource.create(user_id: u2.id, resource_id: r16.id, nickname: "J & C 
 fav8 = FavResource.create(user_id: u4.id, resource_id: r17.id, nickname: "Thorpe")
 fav9 = FavResource.create(user_id: u1.id, resource_id: r15.id, nickname: "Thomas Aquinas")
 
-$scraped_pantries = []
-PantryScraper.crawl!
+# $scraped_pantries = []
+# PantryScraper.crawl!
 
-$scraped_pantries.each do |pantry|
+# $scraped_pantries.each do |pantry|
 
-    Pantry.find_or_create()
-end
+#     Pantry.find_or_create()
+# end
 
-binding.pry
+# binding.pry
