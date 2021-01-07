@@ -66,8 +66,8 @@ class PantryApp
         system 'clear'
         user.reload
         if user.fav_resources.length == 0
-            prompt.select("You do not have any Favorite Pantries. Would you like to add to your Favorite Pantries") do |menu|
-                menu.choice "Add  to Your Favorite Pantries", -> {add_helper}
+            prompt.select("You do not have any Favorite Pantries. Would you like to add to your Favorite Pantries?") do |menu|
+                menu.choice "Add to Your Favorite Pantries", -> {add_helper}
                 menu.choice "Return to Home Page", -> {home_page}
                 end
         else user.fav_resources.length > 0
@@ -133,10 +133,6 @@ class PantryApp
     end
 
     def select_helper
-        # if user.fav_resources.length == 0
-        #     answer = prompt.yes?("You have no saved resources. Add a resource?", convert: :boolean)
-        #     end
-        # end
         fav_resource_arr = user.show_fav_resource
         @selected_resource = prompt.select("Which pantry do you want to select?", fav_resource_arr)
         puts "You have selected #{selected_resource.resource.name}."
