@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_05_135222) do
+ActiveRecord::Schema.define(version: 2021_01_07_103412) do
 
   create_table "fav_resources", force: :cascade do |t|
     t.integer "user_id"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 2021_01_05_135222) do
     t.string "borough"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "password"
   end
 
 end
