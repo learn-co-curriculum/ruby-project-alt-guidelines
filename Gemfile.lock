@@ -7,30 +7,121 @@ GEM
       activemodel (= 5.2.4.4)
       activesupport (= 5.2.4.4)
       arel (>= 9.0)
+    activerecord-reset-pk-sequence (0.2.1)
     activesupport (5.2.4.4)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    addressable (2.7.0)
+      public_suffix (>= 2.0.2, < 5.0)
     arel (9.0.0)
+    capybara (3.34.0)
+      addressable
+      mini_mime (>= 0.1.3)
+      nokogiri (~> 1.8)
+      rack (>= 1.6.0)
+      rack-test (>= 0.6.3)
+      regexp_parser (~> 1.5)
+      xpath (~> 3.2)
+    capybara-mechanize (1.11.0)
+      capybara (>= 2.4.4, < 4)
+      mechanize (~> 2.7.0)
+    childprocess (3.0.0)
+    chronic (0.10.2)
+    cliver (0.3.2)
     coderay (1.1.3)
+    colorize (0.8.1)
     concurrent-ruby (1.1.7)
+    connection_pool (2.2.3)
+    domain_name (0.5.20190701)
+      unf (>= 0.0.5, < 1.0.0)
     faker (2.15.1)
       i18n (>= 1.6, < 2)
+    headless (2.3.1)
+    http-accept (1.7.0)
+    http-cookie (1.0.3)
+      domain_name (~> 0.5)
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
+    kimurai (1.4.0)
+      activesupport
+      capybara (>= 2.15, < 4.0)
+      capybara-mechanize
+      cliver
+      headless
+      murmurhash3
+      nokogiri
+      pmap
+      poltergeist
+      pry
+      rbcat (~> 0.2)
+      selenium-webdriver
+      thor
+      whenever
+    lolize (0.0.3)
+      paint (~> 0.8.3)
+    mechanize (2.7.6)
+      domain_name (~> 0.5, >= 0.5.1)
+      http-cookie (~> 1.0)
+      mime-types (>= 1.17.2)
+      net-http-digest_auth (~> 1.1, >= 1.1.1)
+      net-http-persistent (>= 2.5.2)
+      nokogiri (~> 1.6)
+      ntlm-http (~> 0.1, >= 0.1.1)
+      webrobots (>= 0.0.9, < 0.2)
     method_source (1.0.0)
+    mime-types (3.3.1)
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2020.1104)
+    mini_mime (1.0.2)
+    mini_portile2 (2.5.0)
     minitest (5.14.2)
+    murmurhash3 (0.1.6)
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
+    net-http-digest_auth (1.4.1)
+    net-http-persistent (4.0.0)
+      connection_pool (~> 2.2)
+    netrc (0.11.0)
+    nokogiri (1.11.0)
+      mini_portile2 (~> 2.5.0)
+      racc (~> 1.4)
+    nokogiri (1.11.0-x86_64-linux)
+      racc (~> 1.4)
+    ntlm-http (0.1.1)
+    paint (0.8.7)
+    pastel (0.8.0)
+      tty-color (~> 0.5)
+    pmap (1.1.1)
+    poltergeist (1.18.1)
+      capybara (>= 2.1, < 4)
+      cliver (~> 0.3.1)
+      websocket-driver (>= 0.2.0)
     pry (0.13.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
+    public_suffix (4.0.6)
+    racc (1.5.2)
     rack (2.2.3)
     rack-protection (2.1.0)
       rack
+    rack-test (1.1.0)
+      rack (>= 1.0, < 3)
+    rainbow (3.0.0)
+    rbcat (0.2.1)
+    regexp_parser (1.8.2)
     require_all (3.0.0)
+    rest-client (2.1.0)
+      http-accept (>= 1.7.0, < 2.0)
+      http-cookie (>= 1.0.2, < 2.0)
+      mime-types (>= 1.16, < 4.0)
+      netrc (~> 0.8)
     ruby2_keywords (0.0.2)
+    rubyzip (2.3.0)
+    selenium-webdriver (3.142.7)
+      childprocess (>= 0.5, < 4.0)
+      rubyzip (>= 1.2.2)
     sinatra (2.1.0)
       mustermann (~> 1.0)
       rack (~> 2.2)
@@ -40,21 +131,53 @@ GEM
       activerecord (>= 4.1)
       sinatra (>= 1.0)
     sqlite3 (1.3.13)
+    thor (1.0.1)
     thread_safe (0.3.6)
     tilt (2.0.10)
+    tty-color (0.6.0)
+    tty-cursor (0.7.1)
+    tty-prompt (0.23.0)
+      pastel (~> 0.8)
+      tty-reader (~> 0.8)
+    tty-reader (0.9.0)
+      tty-cursor (~> 0.7)
+      tty-screen (~> 0.8)
+      wisper (~> 2.0)
+    tty-screen (0.8.1)
     tzinfo (1.2.8)
       thread_safe (~> 0.1)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.7.7)
+    webrobots (0.1.2)
+    websocket-driver (0.7.3)
+      websocket-extensions (>= 0.1.0)
+    websocket-extensions (0.1.5)
+    whenever (1.0.0)
+      chronic (>= 0.6.3)
+    wisper (2.0.1)
+    xpath (3.2.0)
+      nokogiri (~> 1.8)
 
 PLATFORMS
   ruby
+  x86_64-linux
 
 DEPENDENCIES
   activerecord (~> 5.2)
+  activerecord-reset-pk-sequence
+  colorize
   faker
+  kimurai
+  lolize
+  pastel
   pry
+  rainbow
   require_all
+  rest-client
   sinatra-activerecord
   sqlite3 (~> 1.3.6)
+  tty-prompt
 
 BUNDLED WITH
-   2.1.4
+   2.2.1

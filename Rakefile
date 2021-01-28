@@ -6,3 +6,10 @@ task :console do
   ActiveRecord::Base.logger = Logger.new(STDOUT)
   Pry.start
 end
+
+
+desc "starts the app"
+task :start do 
+  PantryApp.new.run
+end
+
