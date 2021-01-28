@@ -24,4 +24,12 @@ def menu
     @location = Location.find_or_create_by(name: answer)
     puts "Sounds good, do you want to leave or see a review for #{@location.name.capitalize}?"
 end
+
+def viewing_reviews
+    Review.all.each do
+        puts "name: #{review.name}"
+        puts "description: #{review.description}"
+    end
+    self.greet
+end
 end

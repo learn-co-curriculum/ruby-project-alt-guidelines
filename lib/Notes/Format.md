@@ -18,3 +18,10 @@ Locations:
 1. LA
 2. Seattle
 3. Tokyo
+4. Chicago
+5. New York City
+6. Honolulu
+7. Nashville
+8. Taipet
+9. Salt Lake City
+10. Vancouver BC
