@@ -7,3 +7,6 @@ gem "sqlite3", '~> 1.3.6'
 gem "pry"
 gem "require_all"
 gem "faker"
+gem 'airbnb'
+gem 'text-table', '~> 1.2', '>= 1.2.4'
+gem 'faker-bot'
