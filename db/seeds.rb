@@ -1,7 +1,15 @@
+Review.delete_all
+User.delete_all
+Location.delete_all
+
 10.times do
     User.create(name:Faker::JapaneseMedia::DragonBall.character)
 end
 
+
+# 10.times do
+#     Location.create(name:Faker::Nation.capital_city, description:Faker::TvShows::BojackHorseman.quote)
+# end
 l1 = Location.create(name: "LA", description: "The city of angels")
 l2 = Location.create(name: "Seattle", description: "Hope you brought an umbrella")
 l3 = Location.create(name: "Tokyo", description: "Otaku city")
@@ -14,7 +22,7 @@ l9 = Location.create(name: "Salt Lake City", description: "I heard you like skii
 l10 = Location.create(name: "Vancouver BC", description: "Poutineeeee")
 
 10.times do
-    Review.create(name:Faker::Name.name, description:Faker::Quote.famous_last_words, user: User.all.sample, location: Location.all.sample)
+    Review.create(name:"Tokyo", description:Faker::Quote.most_interesting_man_in_the_world, user: User.all.sample, location: Location.all.sample)
 end
 
 
