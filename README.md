@@ -3,11 +3,8 @@ Module One Final Project - Airbnb
 
 # Objective
 
--Be able to input name
--Be able to select a location to leave or see a review from
--Be able to edit or delete "your own" reviews
--Be able to refer back to the main menu (beginning)
--Be able to exit the app 
+Be able to: input name, select a location to leave or see a review from, edit or delete "your own reviews, refer back to the main menu (beginning) and exit the app
+
 
 ## Installation
 
