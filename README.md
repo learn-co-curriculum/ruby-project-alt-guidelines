@@ -26,6 +26,7 @@ Input your name, then the corresponding city names and numbers to continue on wi
 
 
 
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 

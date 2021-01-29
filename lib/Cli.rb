@@ -60,7 +60,7 @@ def menu
                 puts "Which review did you want to update?"
                 response = gets.chomp
                 r = response.to_i
-                puts "What you want to say"
+                puts "Please enter your review here"
                 response2 = gets.chomp
                 review = arr[r-1]
                 # puts review.inspect
@@ -76,9 +76,6 @@ def menu
             end
         end
     end
-
-    # pets = ["dog", "cat", "fish"]
-    # puts pets[2] # => fisht
 
 def display_reviews(location)
     arr = Review.all.select do |t|
