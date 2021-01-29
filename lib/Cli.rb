@@ -4,6 +4,8 @@ def start
     greet
     user = login
     menu
+    display_reviews
+    options    
     end
     # viewing_reviews
     # puts display_reviews(@location)
