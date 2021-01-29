@@ -6,7 +6,7 @@ def start
     menu
     end
     # viewing_reviews
-    # puts display_reviews($location)
+    # puts display_reviews(@location)
     end
 
    
@@ -26,8 +26,8 @@ def menu
     puts "Select the location you want to leave or see a review for!"
     puts Location.all.map{|location| location.name}
     answer = gets.chomp.capitalize
-    $location = Location.find_or_create_by(name: answer)
-    puts "Sounds good, do you want to leave or see a review for #{$location.name.capitalize}?"
+    @location = Location.find_or_create_by(name: answer)
+    puts "Sounds good, do you want to leave or see a review for #{@location.name.capitalize}?"
     
         loop do
             options
@@ -37,22 +37,48 @@ def menu
             when "1"
                 puts "Enter your review"
                 response = gets.chomp
-                @review = Review.find_or_create_by(description: response, name: $location, user_id:@user.id, location_id:$location.id)
+                system("clear")
+                @review = Review.find_or_create_by(description: response, name: @location, user_id:@user.id, location_id:@location.id)
                 @review.save
                 puts "Thank you for your review"
             when "2"
-                puts Review.all.select {|review| review.user_id == @user.id}
+                arr = Review.all.select {|review| review.user_id == @user.id}
+                arr.each.with_index(1) do |review, index|
+                    puts "#{index}. #{review.description}"
+                end
                 puts "Which review did you want to delete?"
-             when "3"
-                puts display_reviews($location)
+                response = gets.chomp
+                system("clear")
+                r = response.to_i
+                arr[r-1].destroy
+                puts "Your review has been deleted"
+            when "3"
+                arr = Review.all.select {|review| review.user_id == @user.id}
+                arr.each.with_index(1) do |review, index|
+                    puts "#{index}. #{review.description}"
+                end
+                puts "Which review did you want to update?"
+                response = gets.chomp
+                r = response.to_i
+                puts "What you want to say"
+                response2 = gets.chomp
+                review = arr[r-1]
+                # puts review.inspect
+                review.description = response2
+                review.save
+                puts "Your review has been updated"
             when "4"
-                break
+                puts display_reviews(@location)
             when "5"
+                break
+            when "6"
             exit
             end
         end
     end
 
+    # pets = ["dog", "cat", "fish"]
+    # puts pets[2] # => fisht
 
 def display_reviews(location)
     arr = Review.all.select do |t|
@@ -65,9 +91,11 @@ end
 def options
     puts "[1] Leave a review"
     puts "[2] Delete a review"
-    puts "[3] See a review"
-    puts "[4] Back to main menu"
-    puts "[5] Exit app"
+    puts "[3] Update a review"
+    puts "[4] See a review"
+    puts "[5] Back to main menu"
+    puts "[6] Exit app"
+   
 end
 
 
