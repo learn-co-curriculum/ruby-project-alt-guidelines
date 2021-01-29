@@ -22,7 +22,16 @@ l9 = Location.create(name: "Salt Lake City", description: "I heard you like skii
 l10 = Location.create(name: "Vancouver BC", description: "Poutineeeee")
 
 10.times do
+    Review.create(name:"LA", description:Faker::Quote.most_interesting_man_in_the_world, user: User.all.sample, location: Location.all.sample)
+    Review.create(name:"Seattle", description:Faker::Quote.most_interesting_man_in_the_world, user: User.all.sample, location: Location.all.sample)
     Review.create(name:"Tokyo", description:Faker::Quote.most_interesting_man_in_the_world, user: User.all.sample, location: Location.all.sample)
+    Review.create(name:"Chicago", description:Faker::Quote.most_interesting_man_in_the_world, user: User.all.sample, location: Location.all.sample)
+    Review.create(name:"New York City", description:Faker::Quote.most_interesting_man_in_the_world, user: User.all.sample, location: Location.all.sample)
+    Review.create(name:"Honolulu", description:Faker::Quote.most_interesting_man_in_the_world, user: User.all.sample, location: Location.all.sample)
+    Review.create(name:"Nashville", description:Faker::Quote.most_interesting_man_in_the_world, user: User.all.sample, location: Location.all.sample)
+    Review.create(name:"Taipei", description:Faker::Quote.most_interesting_man_in_the_world, user: User.all.sample, location: Location.all.sample)
+    Review.create(name:"Salt Lake City", description:Faker::Quote.most_interesting_man_in_the_world, user: User.all.sample, location: Location.all.sample)
+    Review.create(name:"Vancouver BC", description:Faker::Quote.most_interesting_man_in_the_world, user: User.all.sample, location: Location.all.sample)
 end
 
 
